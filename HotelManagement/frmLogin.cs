@@ -1,4 +1,5 @@
 ﻿
+using HotelManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,38 +37,22 @@ namespace HotelManagement
             }
             else
             {
-                string hashed = ComputeSHA256(password);
+                string hashed = CryptographyHelper.ComputeSHA256(password);
                 var account = HotelDBEntities.Accounts.Where(
-                    a => a.Username == username 
-                    && a.Password == hashed
+                    a => a.Username.Equals(username) 
+                    && a.Password.Equals(hashed)
                     ).FirstOrDefault();
                 if(account != null)
                 {
-                    MessageBox.Show("Login success!");
+                    //MessageBox.Show("Login success!");
+                    frmMain.GetInstance().Login(account);
+                    this.Hide() ;
                 }
                 else
                 {
                     MessageBox.Show("Incorrect username or password!");
                 }
             }
-        }
-
-        static string ComputeSHA256(string s)
-        {
-            string hash = String.Empty;
-
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hashValue = sha256.ComputeHash(Encoding.UTF8.GetBytes(s));
-
-                // Expecting hashed in string format
-                foreach (byte b in hashValue)
-                {
-                    hash += $"{b:X2}";
-                }
-            }
-
-            return hash;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -78,12 +63,13 @@ namespace HotelManagement
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.Close();
             Application.Exit();
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //frmMain.GetInstance().Close();
+            frmMain.GetInstance().Close();
         }
     }
 }

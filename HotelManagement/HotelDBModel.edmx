@@ -13,7 +13,6 @@
           <Property Name="EmployeeID" Type="char" MaxLength="36" />
           <Property Name="Username" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Password" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="Permission" Type="varchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <EntityType Name="Bill">
           <Key>
@@ -23,7 +22,7 @@
           <Property Name="BookingID" Type="char" MaxLength="36" />
           <Property Name="CustomerID" Type="char" MaxLength="36" />
           <Property Name="EmployeeID" Type="char" MaxLength="36" />
-          <Property Name="BillDate" Type="date" Nullable="false" />
+          <Property Name="BillDate" Type="datetime" Nullable="false" />
           <Property Name="TotalCost" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Booking">
@@ -34,8 +33,8 @@
           <Property Name="CustomerID" Type="char" MaxLength="36" />
           <Property Name="EmployeeID" Type="char" MaxLength="36" />
           <Property Name="RoomID" Type="char" MaxLength="36" />
-          <Property Name="BookDate" Type="date" Nullable="false" />
-          <Property Name="CheckinDate" Type="date" Nullable="false" />
+          <Property Name="BookDate" Type="datetime" Nullable="false" />
+          <Property Name="CheckinDate" Type="datetime" Nullable="false" />
           <Property Name="StayHour" Type="int" Nullable="false" />
           <Property Name="ServiceCost" Type="float" Nullable="false" />
           <Property Name="ExtraFee" Type="float" Nullable="false" />
@@ -118,7 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__BookingID__5AEE82B9">
+        <Association Name="FK__Bill__BookingID__59063A47">
           <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__CustomerID__5BE2A6F2">
+        <Association Name="FK__Bill__CustomerID__59FA5E80">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +141,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__EmployeeID__5CD6CB2B">
+        <Association Name="FK__Bill__EmployeeID__5AEE82B9">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__Custome__440B1D61">
+        <Association Name="FK__Booking__Custome__4222D4EF">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__Employe__44FF419A">
+        <Association Name="FK__Booking__Employe__4316F928">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +177,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__RoomID__45F365D3">
+        <Association Name="FK__Booking__RoomID__440B1D61">
           <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceDe__Booki__5535A963">
+        <Association Name="FK__ServiceDe__Booki__534D60F1">
           <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
           <End Role="ServiceDetail" Type="Self.ServiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceDe__Servi__5629CD9C">
+        <Association Name="FK__ServiceDe__Servi__5441852A">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="ServiceDetail" Type="Self.ServiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +213,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StayInRoo__Custo__5165187F">
+        <Association Name="FK__StayInRoo__Custo__4F7CD00D">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="StayInRoom" Type="Self.StayInRoom" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +225,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StayInRoo__RoomI__5070F446">
+        <Association Name="FK__StayInRoo__RoomI__4E88ABD4">
           <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
           <End Role="StayInRoom" Type="Self.StayInRoom" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,43 +251,43 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__BookingID__5AEE82B9" Association="Self.FK__Bill__BookingID__5AEE82B9">
+          <AssociationSet Name="FK__Bill__BookingID__59063A47" Association="Self.FK__Bill__BookingID__59063A47">
             <End Role="Booking" EntitySet="Booking" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__CustomerID__5BE2A6F2" Association="Self.FK__Bill__CustomerID__5BE2A6F2">
+          <AssociationSet Name="FK__Bill__CustomerID__59FA5E80" Association="Self.FK__Bill__CustomerID__59FA5E80">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__EmployeeID__5CD6CB2B" Association="Self.FK__Bill__EmployeeID__5CD6CB2B">
+          <AssociationSet Name="FK__Bill__EmployeeID__5AEE82B9" Association="Self.FK__Bill__EmployeeID__5AEE82B9">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__Custome__440B1D61" Association="Self.FK__Booking__Custome__440B1D61">
+          <AssociationSet Name="FK__Booking__Custome__4222D4EF" Association="Self.FK__Booking__Custome__4222D4EF">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__Employe__44FF419A" Association="Self.FK__Booking__Employe__44FF419A">
+          <AssociationSet Name="FK__Booking__Employe__4316F928" Association="Self.FK__Booking__Employe__4316F928">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__RoomID__45F365D3" Association="Self.FK__Booking__RoomID__45F365D3">
+          <AssociationSet Name="FK__Booking__RoomID__440B1D61" Association="Self.FK__Booking__RoomID__440B1D61">
             <End Role="Room" EntitySet="Room" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceDe__Booki__5535A963" Association="Self.FK__ServiceDe__Booki__5535A963">
+          <AssociationSet Name="FK__ServiceDe__Booki__534D60F1" Association="Self.FK__ServiceDe__Booki__534D60F1">
             <End Role="Booking" EntitySet="Booking" />
             <End Role="ServiceDetail" EntitySet="ServiceDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceDe__Servi__5629CD9C" Association="Self.FK__ServiceDe__Servi__5629CD9C">
+          <AssociationSet Name="FK__ServiceDe__Servi__5441852A" Association="Self.FK__ServiceDe__Servi__5441852A">
             <End Role="Service" EntitySet="Service" />
             <End Role="ServiceDetail" EntitySet="ServiceDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__StayInRoo__Custo__5165187F" Association="Self.FK__StayInRoo__Custo__5165187F">
+          <AssociationSet Name="FK__StayInRoo__Custo__4F7CD00D" Association="Self.FK__StayInRoo__Custo__4F7CD00D">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="StayInRoom" EntitySet="StayInRoom" />
           </AssociationSet>
-          <AssociationSet Name="FK__StayInRoo__RoomI__5070F446" Association="Self.FK__StayInRoo__RoomI__5070F446">
+          <AssociationSet Name="FK__StayInRoo__RoomI__4E88ABD4" Association="Self.FK__StayInRoo__RoomI__4E88ABD4">
             <End Role="Room" EntitySet="Room" />
             <End Role="StayInRoom" EntitySet="StayInRoom" />
           </AssociationSet>
@@ -306,7 +305,6 @@
           <Property Name="EmployeeID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Permission" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Account__Employe__2A4B4B5E" FromRole="Account" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Bill">
@@ -317,11 +315,11 @@
           <Property Name="BookingID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="CustomerID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
-          <Property Name="BillDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BillDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TotalCost" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK__Bill__BookingID__5AEE82B9" FromRole="Bill" ToRole="Booking" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__Bill__CustomerID__5BE2A6F2" FromRole="Bill" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK__Bill__EmployeeID__5CD6CB2B" FromRole="Bill" ToRole="Employee" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK__Bill__BookingID__59063A47" FromRole="Bill" ToRole="Booking" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Bill__CustomerID__59FA5E80" FromRole="Bill" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Bill__EmployeeID__5AEE82B9" FromRole="Bill" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -331,18 +329,18 @@
           <Property Name="CustomerID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="RoomID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
-          <Property Name="BookDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CheckinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BookDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CheckinDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StayHour" Type="Int32" Nullable="false" />
           <Property Name="ServiceCost" Type="Double" Nullable="false" />
           <Property Name="ExtraFee" Type="Double" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__BookingID__5AEE82B9" FromRole="Booking" ToRole="Bill" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__Booking__Custome__440B1D61" FromRole="Booking" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK__Booking__Employe__44FF419A" FromRole="Booking" ToRole="Employee" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__Booking__RoomID__45F365D3" FromRole="Booking" ToRole="Room" />
-          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__Booki__5535A963" FromRole="Booking" ToRole="ServiceDetail" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__BookingID__59063A47" FromRole="Booking" ToRole="Bill" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Booking__Custome__4222D4EF" FromRole="Booking" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Booking__Employe__4316F928" FromRole="Booking" ToRole="Employee" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__Booking__RoomID__440B1D61" FromRole="Booking" ToRole="Room" />
+          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__Booki__534D60F1" FromRole="Booking" ToRole="ServiceDetail" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -355,9 +353,9 @@
           <Property Name="Phone" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CitizenID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__CustomerID__5BE2A6F2" FromRole="Customer" ToRole="Bill" />
-          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Custome__440B1D61" FromRole="Customer" ToRole="Booking" />
-          <NavigationProperty Name="StayInRooms" Relationship="Self.FK__StayInRoo__Custo__5165187F" FromRole="Customer" ToRole="StayInRoom" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__CustomerID__59FA5E80" FromRole="Customer" ToRole="Bill" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Custome__4222D4EF" FromRole="Customer" ToRole="Booking" />
+          <NavigationProperty Name="StayInRooms" Relationship="Self.FK__StayInRoo__Custo__4F7CD00D" FromRole="Customer" ToRole="StayInRoom" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -371,8 +369,8 @@
           <Property Name="Salary" Type="Double" Nullable="false" />
           <Property Name="Position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Employe__2A4B4B5E" FromRole="Employee" ToRole="Account" />
-          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__EmployeeID__5CD6CB2B" FromRole="Employee" ToRole="Bill" />
-          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Employe__44FF419A" FromRole="Employee" ToRole="Booking" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__EmployeeID__5AEE82B9" FromRole="Employee" ToRole="Bill" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Employe__4316F928" FromRole="Employee" ToRole="Booking" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -385,8 +383,8 @@
           <Property Name="HourCost" Type="Double" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__RoomID__45F365D3" FromRole="Room" ToRole="Booking" />
-          <NavigationProperty Name="StayInRooms" Relationship="Self.FK__StayInRoo__RoomI__5070F446" FromRole="Room" ToRole="StayInRoom" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__RoomID__440B1D61" FromRole="Room" ToRole="Booking" />
+          <NavigationProperty Name="StayInRooms" Relationship="Self.FK__StayInRoo__RoomI__4E88ABD4" FromRole="Room" ToRole="StayInRoom" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -397,7 +395,7 @@
           <Property Name="InStock" Type="Int32" Nullable="false" />
           <Property Name="UnitCost" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__Servi__5629CD9C" FromRole="Service" ToRole="ServiceDetail" />
+          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__Servi__5441852A" FromRole="Service" ToRole="ServiceDetail" />
         </EntityType>
         <EntityType Name="ServiceDetail">
           <Key>
@@ -407,8 +405,8 @@
           <Property Name="BookingID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="ServiceID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK__ServiceDe__Booki__5535A963" FromRole="ServiceDetail" ToRole="Booking" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__ServiceDe__Servi__5629CD9C" FromRole="ServiceDetail" ToRole="Service" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK__ServiceDe__Booki__534D60F1" FromRole="ServiceDetail" ToRole="Booking" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__ServiceDe__Servi__5441852A" FromRole="ServiceDetail" ToRole="Service" />
         </EntityType>
         <EntityType Name="StayInRoom">
           <Key>
@@ -418,8 +416,8 @@
           <Property Name="RoomID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="CustomerID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="IsStayIn" Type="Boolean" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__StayInRoo__Custo__5165187F" FromRole="StayInRoom" ToRole="Customer" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__StayInRoo__RoomI__5070F446" FromRole="StayInRoom" ToRole="Room" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__StayInRoo__Custo__4F7CD00D" FromRole="StayInRoom" ToRole="Customer" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__StayInRoo__RoomI__4E88ABD4" FromRole="StayInRoom" ToRole="Room" />
         </EntityType>
         <Association Name="FK__Account__Employe__2A4B4B5E">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
@@ -433,7 +431,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__BookingID__5AEE82B9">
+        <Association Name="FK__Bill__BookingID__59063A47">
           <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +443,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__CustomerID__5BE2A6F2">
+        <Association Name="FK__Bill__CustomerID__59FA5E80">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -457,7 +455,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__EmployeeID__5CD6CB2B">
+        <Association Name="FK__Bill__EmployeeID__5AEE82B9">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -469,7 +467,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__Custome__440B1D61">
+        <Association Name="FK__Booking__Custome__4222D4EF">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,7 +479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__Employe__44FF419A">
+        <Association Name="FK__Booking__Employe__4316F928">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +491,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Booking__RoomID__45F365D3">
+        <Association Name="FK__Booking__RoomID__440B1D61">
           <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +503,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceDe__Booki__5535A963">
+        <Association Name="FK__ServiceDe__Booki__534D60F1">
           <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
           <End Role="ServiceDetail" Type="Self.ServiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +515,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StayInRoo__Custo__5165187F">
+        <Association Name="FK__StayInRoo__Custo__4F7CD00D">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="StayInRoom" Type="Self.StayInRoom" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +527,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StayInRoo__RoomI__5070F446">
+        <Association Name="FK__StayInRoo__RoomI__4E88ABD4">
           <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
           <End Role="StayInRoom" Type="Self.StayInRoom" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,7 +539,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServiceDe__Servi__5629CD9C">
+        <Association Name="FK__ServiceDe__Servi__5441852A">
           <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="ServiceDetail" Type="Self.ServiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -567,43 +565,43 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__BookingID__5AEE82B9" Association="Self.FK__Bill__BookingID__5AEE82B9">
+          <AssociationSet Name="FK__Bill__BookingID__59063A47" Association="Self.FK__Bill__BookingID__59063A47">
             <End Role="Booking" EntitySet="Bookings" />
             <End Role="Bill" EntitySet="Bills" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__CustomerID__5BE2A6F2" Association="Self.FK__Bill__CustomerID__5BE2A6F2">
+          <AssociationSet Name="FK__Bill__CustomerID__59FA5E80" Association="Self.FK__Bill__CustomerID__59FA5E80">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Bill" EntitySet="Bills" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__EmployeeID__5CD6CB2B" Association="Self.FK__Bill__EmployeeID__5CD6CB2B">
+          <AssociationSet Name="FK__Bill__EmployeeID__5AEE82B9" Association="Self.FK__Bill__EmployeeID__5AEE82B9">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Bill" EntitySet="Bills" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__Custome__440B1D61" Association="Self.FK__Booking__Custome__440B1D61">
+          <AssociationSet Name="FK__Booking__Custome__4222D4EF" Association="Self.FK__Booking__Custome__4222D4EF">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__Employe__44FF419A" Association="Self.FK__Booking__Employe__44FF419A">
+          <AssociationSet Name="FK__Booking__Employe__4316F928" Association="Self.FK__Booking__Employe__4316F928">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Booking__RoomID__45F365D3" Association="Self.FK__Booking__RoomID__45F365D3">
+          <AssociationSet Name="FK__Booking__RoomID__440B1D61" Association="Self.FK__Booking__RoomID__440B1D61">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceDe__Booki__5535A963" Association="Self.FK__ServiceDe__Booki__5535A963">
+          <AssociationSet Name="FK__ServiceDe__Booki__534D60F1" Association="Self.FK__ServiceDe__Booki__534D60F1">
             <End Role="Booking" EntitySet="Bookings" />
             <End Role="ServiceDetail" EntitySet="ServiceDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__StayInRoo__Custo__5165187F" Association="Self.FK__StayInRoo__Custo__5165187F">
+          <AssociationSet Name="FK__StayInRoo__Custo__4F7CD00D" Association="Self.FK__StayInRoo__Custo__4F7CD00D">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="StayInRoom" EntitySet="StayInRooms" />
           </AssociationSet>
-          <AssociationSet Name="FK__StayInRoo__RoomI__5070F446" Association="Self.FK__StayInRoo__RoomI__5070F446">
+          <AssociationSet Name="FK__StayInRoo__RoomI__4E88ABD4" Association="Self.FK__StayInRoo__RoomI__4E88ABD4">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="StayInRoom" EntitySet="StayInRooms" />
           </AssociationSet>
-          <AssociationSet Name="FK__ServiceDe__Servi__5629CD9C" Association="Self.FK__ServiceDe__Servi__5629CD9C">
+          <AssociationSet Name="FK__ServiceDe__Servi__5441852A" Association="Self.FK__ServiceDe__Servi__5441852A">
             <End Role="Service" EntitySet="Services" />
             <End Role="ServiceDetail" EntitySet="ServiceDetails" />
           </AssociationSet>
@@ -621,7 +619,6 @@
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

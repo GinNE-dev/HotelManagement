@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f9ad184f5104615abd16968c09e12b5" Name="Diagram1">
+      <Diagram DiagramId="b5ff9ea4ea0e4882b66cd59a49559661" Name="Diagram1">
         <EntityTypeShape EntityType="HotelDBModel.Account" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDBModel.Bill" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDBModel.Booking" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
@@ -15,16 +15,16 @@
         <EntityTypeShape EntityType="HotelDBModel.ServiceDetail" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDBModel.StayInRoom" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="HotelDBModel.FK__Account__Employe__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Bill__BookingID__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Bill__CustomerID__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Bill__EmployeeID__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Booking__Custome__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Booking__Employe__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__Booking__RoomID__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__ServiceDe__Booki__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__StayInRoo__Custo__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__StayInRoo__RoomI__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelDBModel.FK__ServiceDe__Servi__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Bill__BookingID__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Bill__CustomerID__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Bill__EmployeeID__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Booking__Custome__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Booking__Employe__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__Booking__RoomID__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__ServiceDe__Booki__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__StayInRoo__Custo__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__StayInRoo__RoomI__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDBModel.FK__ServiceDe__Servi__5441852A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

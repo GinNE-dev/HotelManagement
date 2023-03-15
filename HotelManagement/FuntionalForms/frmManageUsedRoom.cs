@@ -521,6 +521,29 @@ namespace HotelManagement.FuntionalForms
                     bill.TotalCost = _booking.ServiceCost + roomFee + _booking.ExtraFee;
 
                     HotelDB.SaveChanges();
+                    var billFilePath = DataExporter.ExportBill(bill);
+                    DialogResult dialogSensResult = MessageBox.Show(TextDictionary.MESSAGE_COMFIRM_SEND_BILL_EMAIL,
+                        TextDictionary.TITLE_COMFIRM_SEND_BILL_EMAIL, MessageBoxButtons.YesNo);
+                    if (dialogSensResult == DialogResult.Yes)
+                    {
+                        if (bill != null)
+                        {
+                            if (bill.Customer != null && bill.Customer.Email != null)
+                            {
+                                if (InputValidateHelper.ValidateEmailFormat(bill.Customer.Email))
+                                {
+                                    if (SimpleMailPost.SendMail(bill.Customer.Email, "Hotel bill", "", billFilePath))
+                                    {
+                                        MessageBox.Show(TextDictionary.MESSAGE_SEND_BILL_EMAIL_SUCCESS);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(TextDictionary.MESSAGE_SEND_BILL_EMAIL_ERROR);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -538,9 +561,10 @@ namespace HotelManagement.FuntionalForms
                 {
                     var stayInCustomers = HotelDB.GetDBEntities().StayInRooms.Where(x => x.RoomID.Equals(_booking.RoomID));
                     HotelDB.GetDBEntities().StayInRooms.RemoveRange(stayInCustomers);
-                    _booking.Status = "Closed";
-                    _booking.Room.Status = "Ready";
+                    _booking.Status = TextDictionary.BOOKING_CLOSED;
+                    _booking.Room.Status = TextDictionary.ROOM_READY;
                     HotelDB.SaveChanges();
+                    frmMain.GetInstance().ReloadBookingFormVisible();
                     this.Close();
                 }
                 else

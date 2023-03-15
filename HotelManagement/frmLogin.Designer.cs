@@ -54,6 +54,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(190, 22);
             this.txtUsername.TabIndex = 1;
+            this.txtUsername.Text = "admin";
             // 
             // txtPassword
             // 
@@ -62,6 +63,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(190, 22);
             this.txtPassword.TabIndex = 4;
+            this.txtPassword.Text = "admin";
             // 
             // btnCancel
             // 
@@ -104,6 +106,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MinimumSize = new System.Drawing.Size(407, 337);
             this.Name = "frmLogin";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLogin_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

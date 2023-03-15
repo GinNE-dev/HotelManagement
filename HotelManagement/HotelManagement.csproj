@@ -45,11 +45,23 @@
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Core.0.9.8\lib\net40\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +71,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs">
@@ -88,6 +102,24 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FuntionalForms\FormAddNewEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\FormAddNewEmployee.Designer.cs">
+      <DependentUpon>FormAddNewEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuntionalForms\FormAddService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\FormAddService.Designer.cs">
+      <DependentUpon>FormAddService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuntionalForms\FormNewAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\FormNewAccount.Designer.cs">
+      <DependentUpon>FormNewAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="FuntionalForms\frmBillManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +131,12 @@
     </Compile>
     <Compile Include="FuntionalForms\frmBookingManagement.Designer.cs">
       <DependentUpon>frmBookingManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuntionalForms\frmEmployeeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\frmEmployeeManagement.Designer.cs">
+      <DependentUpon>frmEmployeeManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="FuntionalForms\frmManageUsedRoom.cs">
       <SubType>Form</SubType>
@@ -118,11 +156,29 @@
     <Compile Include="FuntionalForms\frmPlaceBooking.Designer.cs">
       <DependentUpon>frmPlaceBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="FuntionalForms\frmPrintReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\frmPrintReview.Designer.cs">
+      <DependentUpon>frmPrintReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="FuntionalForms\frmRoomBooking.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FuntionalForms\frmRoomBooking.Designer.cs">
       <DependentUpon>frmRoomBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuntionalForms\frmServiceManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\frmServiceManagement.Designer.cs">
+      <DependentUpon>frmServiceManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuntionalForms\frmStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuntionalForms\frmStatistic.Designer.cs">
+      <DependentUpon>frmStatistic.cs</DependentUpon>
     </Compile>
     <Compile Include="HotelDB.cs" />
     <Compile Include="HotelDBModel.Context.cs">
@@ -156,7 +212,9 @@
     </Compile>
     <Compile Include="Utils\DataExporter.cs" />
     <Compile Include="Utils\DrawingMathHelper.cs" />
+    <Compile Include="Utils\CryptographyHelper.cs" />
     <Compile Include="Utils\InputValidateHelper.cs" />
+    <Compile Include="Utils\SimpleMailPost.cs" />
     <Compile Include="Utils\TextDictionary.cs" />
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -164,8 +222,23 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\FormAddNewEmployee.resx">
+      <DependentUpon>FormAddNewEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\FormAddService.resx">
+      <DependentUpon>FormAddService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\FormNewAccount.resx">
+      <DependentUpon>FormNewAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\frmBillManagement.resx">
+      <DependentUpon>frmBillManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FuntionalForms\frmBookingManagement.resx">
       <DependentUpon>frmBookingManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\frmEmployeeManagement.resx">
+      <DependentUpon>frmEmployeeManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FuntionalForms\frmManageUsedRoom.resx">
       <DependentUpon>frmManageUsedRoom.cs</DependentUpon>
@@ -176,8 +249,17 @@
     <EmbeddedResource Include="FuntionalForms\frmPlaceBooking.resx">
       <DependentUpon>frmPlaceBooking.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\frmPrintReview.resx">
+      <DependentUpon>frmPrintReview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FuntionalForms\frmRoomBooking.resx">
       <DependentUpon>frmRoomBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\frmServiceManagement.resx">
+      <DependentUpon>frmServiceManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuntionalForms\frmStatistic.resx">
+      <DependentUpon>frmStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -214,6 +296,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="HotelDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HotelDBModel.edmx</DependentUpon>
@@ -224,7 +309,24 @@
       <DependentUpon>HotelDBModel.edmx</DependentUpon>
       <LastGenOutput>HotelDBModel.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\menu.png" />
+    <Content Include="Resources\489aae74156345a4be9d6beda6d9ce03.png" />
+    <Content Include="Resources\489aae74156345a4be9d6beda6d9ce031.png" />
+    <Content Include="Resources\accounting.png" />
+    <Content Include="Resources\appointment %281%29.png" />
+    <Content Include="Resources\bed.png" />
+    <Content Include="Resources\booking.png" />
+    <Content Include="Resources\logo-color1.png" />
+    <Content Include="Resources\logo-color.png" />
+    <Content Include="Resources\manager.png" />
+    <Content Include="Resources\menu-bar.png" />
+    <None Include="Resources\bg1.png" />
+    <None Include="Resources\bg.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\invoice.png" />
+    <None Include="Resources\booking %281%29.png" />
+    <None Include="Resources\bed1.png" />
+    <None Include="Resources\mng.png" />
+    <None Include="Resources\menu-bar1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

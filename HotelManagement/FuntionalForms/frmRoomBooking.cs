@@ -16,7 +16,17 @@ namespace HotelManagement.FuntionalForms
         public frmRoomBooking()
         {
             InitializeComponent();
+            //
             PrepareRoomGrid();
+            PrepareCompnents();
+        }
+
+        private void PrepareCompnents()
+        {
+            if(comboBoxRoomType.Items.Count > 0)
+            {
+                comboBoxRoomType.SelectedIndex = 0;
+            }
         }
 
         private void PrepareRoomGrid()
@@ -63,32 +73,30 @@ namespace HotelManagement.FuntionalForms
         {
             if (rooms == null) return;
             //Filtering
-            string key = txtSearch.Text.ToLower();
-            bool pass = true;
+            string filter = txtSearch.Text != null ? txtSearch.Text.ToLower() : string.Empty;
+            bool pass = false;
             foreach (Room r in rooms)
             {
-                /*
                 pass = false;
-                pass = pass || room.Number.ToString().ToLower().Equals(key);
-                pass = pass || room.RoomType.ToLower().Equals(key);
-                pass = pass || room.Status.ToLower().Equals(key);
+                pass = pass || (r.Number != null && r.Number.ToString().Contains(filter));
                 
-                if (checkBoxVIP.Checked)
+                if (checkBoxReady.Checked)
                 {
-                    pass &= room.VIP;
+                    pass = pass && r.Status.ToLower().Equals(TextDictionary.ROOM_READY.ToLower());
                 }
-                */
-                /*
-                if(dataGridViewRoom.Rows.Count>0)
+
+                if(comboBoxRoomType.Text != null)
                 {
-                    row = (DataGridViewRow)dataGridViewRoom.Rows[0].Clone();
+                    if(!comboBoxRoomType.Text.ToString().Equals("All"))
+                    {
+                        pass = pass && r.RoomType != null && r.RoomType.ToLower().Equals(comboBoxRoomType.Text.ToLower());
+                    }
                 }
-                else
+                
+                if (pass)
                 {
-                    
+                    dataGridViewRoom.Rows.Add(r.ID, r.Number, r.RoomType, r.HourCost, r.Status, r.VIP, r.Description);
                 }
-                */
-                dataGridViewRoom.Rows.Add(r.ID, r.Number, r.RoomType, r.HourCost, r.Status, r.VIP, r.Description);
             }
 
             foreach (DataGridViewRow row in dataGridViewRoom.Rows)
@@ -123,7 +131,6 @@ namespace HotelManagement.FuntionalForms
 
             dataGridViewRoom.ClearSelection();
             dataGridViewRoom.Rows.Clear();
-
             UpdateRoomGrid(rooms);
         }
 
@@ -163,10 +170,7 @@ namespace HotelManagement.FuntionalForms
                                     MessageBox.Show(TextDictionary.MESSAGE_ROOM_CLEANING);
                                     break;
                                 default:
-                                    frmPlaceBooking placeBooking = new frmPlaceBooking();
-                                    placeBooking.RegisterToBooking(employee, room);
-                                    placeBooking.ShowDialog();
-                                    
+                                    frmMain.GetInstance().OpenPlaceBooking(room);
                                     break;
                             }
                         }
@@ -198,6 +202,28 @@ namespace HotelManagement.FuntionalForms
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             DataGridViewCellCollection cells = dataGridViewRoom.Rows[e.RowIndex].Cells;
             ShowRowRoomCellsData(cells);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            ReloadRoomGrid();
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            ReloadRoomGrid();
+        }
+
+        private void checkBoxReady_CheckedChanged(object sender, EventArgs e)
+        {
+            ReloadRoomGrid();
+        }
+
+        private void comboBoxRoomType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if(comboBoxRoomType.)
+            ReloadRoomGrid();
         }
     }
 }

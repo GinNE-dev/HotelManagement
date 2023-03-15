@@ -24,7 +24,7 @@ namespace HotelManagement.FuntionalForms
 
             dgvBooking.Rows.Clear();
             dgvBooking.Columns.Add(TextDictionary.BOOKING_ID_COLUMN_NAME, TextDictionary.BOOKING_ID_COLUMN_NAME);
-            dgvBooking.Columns[TextDictionary.BOOKING_ID_COLUMN_NAME].Visible = false;
+            dgvBooking.Columns[TextDictionary.BOOKING_ID_COLUMN_NAME].Visible = true;
             dgvBooking.Columns.Add(TextDictionary.CLIENT_NAME_COLUMN_NAME, TextDictionary.CLIENT_NAME_COLUMN_TEXT);
             dgvBooking.Columns.Add(TextDictionary.ROOM_NUMBER_COLUMN_NAME, TextDictionary.ROOM_NUMBER_COLUMN_TEXT);
             dgvBooking.Columns.Add(TextDictionary.BOOKING_STATUS_COLUMN_NAME, TextDictionary.BOOKING_STATUS_COLUMN_TEXT);
@@ -45,46 +45,35 @@ namespace HotelManagement.FuntionalForms
         {
             if (bookings == null) return;
             //Filtering
-            //string key = txtSearch.Text.ToLower();
-            //bool pass = true;
+            string filter = txtSearch.Text != null ? txtSearch.Text.ToLower() : String.Empty;
+            bool pass = false;
             foreach (Booking b in bookings)
             {
-                /*
                 pass = false;
-                pass = pass || room.Number.ToString().ToLower().Equals(key);
-                pass = pass || room.RoomType.ToLower().Equals(key);
-                pass = pass || room.Status.ToLower().Equals(key);
+                if (b.Customer == null || b.Room == null || b.Employee == null) continue;
                 
-                if (checkBoxVIP.Checked)
+                pass = pass || b.Customer.Name != null && b.Customer.Name.ToLower().Contains(filter);
+                //MessageBox.Show(pass.ToString());
+                pass = pass || b.Room.Number != null && b.Room.Number.ToString().Equals(filter);
+
+                //MessageBox.Show(b.Room.Number.ToString()+":"+filter+"-"+ b.Room.Number.ToString().Equals(filter).ToString());
+                if(pass)
                 {
-                    pass &= room.VIP;
+                    dgvBooking.Rows.Add(b.ID, b.Customer.Name, b.Room.Number, b.Status);
                 }
-                */
-                /*
-                if(dataGridViewRoom.Rows.Count>0)
-                {
-                    row = (DataGridViewRow)dataGridViewRoom.Rows[0].Clone();
-                }
-                else
-                {
-                    
-                }
-                */
-                if(b.Customer == null || b.Room == null || b.Employee == null) continue;
-                dgvBooking.Rows.Add(b.ID, b.Customer.Name, b.Room.Number, b.Status);
             }
 
             foreach (DataGridViewRow row in dgvBooking.Rows)
             {
-                switch (row.Cells[TextDictionary.BOOKING_STATUS_COLUMN_NAME].Value.ToString().ToLower())
+                switch (row.Cells[TextDictionary.BOOKING_STATUS_COLUMN_NAME].Value.ToString())
                 {
-                    case "approved":
+                    case TextDictionary.BOOKING_APPROVED:
                         row.DefaultCellStyle.BackColor = Color.FromArgb(104, 232, 90);
                         break;
-                    case "closed":
+                    case TextDictionary.BOOKING_CLOSED:
                         row.DefaultCellStyle.BackColor = Color.FromArgb(232, 90, 90);
                         break;
-                    case "pending":
+                    case TextDictionary.BOOKING_PENDING:
                         row.DefaultCellStyle.BackColor = Color.FromArgb(187, 232, 90);
                         break;
                     default:
@@ -94,7 +83,7 @@ namespace HotelManagement.FuntionalForms
             }
         }
 
-        private void ReloadBookingGrid(IEnumerable<Booking> bookings = null)
+        public void ReloadBookingGrid(IEnumerable<Booking> bookings = null)
         {
             if (bookings == null)
             {
@@ -136,6 +125,17 @@ namespace HotelManagement.FuntionalForms
                 default:
                     break;
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            ReloadBookingGrid();
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            ReloadBookingGrid();
         }
     }
 }

@@ -466,6 +466,7 @@
             this.MaximumSize = new System.Drawing.Size(1318, 900);
             this.MinimumSize = new System.Drawing.Size(1318, 900);
             this.Name = "frmManageUsedRoom";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmManageUsedRoom";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmManageUsedRoom_FormClosing);
             this.VisibleChanged += new System.EventHandler(this.frmManageUsedRoom_VisibleChanged);

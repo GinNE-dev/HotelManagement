@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -98,12 +99,12 @@ namespace HotelManagement.Utils
             return lines.Count-1;
         }
 
-        public static void ExportBill(Bill bill)
+        public static string ExportBill(Bill bill)
         {
-            GenerateBill(bill);
+            return GenerateBill(bill);
         }
 
-        private static void GenerateBill(Bill bill)
+        private static string GenerateBill(Bill bill)
         {
             Document document = new Document();
 
@@ -118,26 +119,38 @@ namespace HotelManagement.Utils
             Font lableFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.ITALIC + Font.BOLD);
             Font normalTextFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.ITALIC);
             Paragraph title = new Paragraph("Bill", new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD));
-            Paragraph shopName = new Paragraph("Pi Store", new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD));
+            Paragraph shopName = new Paragraph("Infinite Hotel", new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD));
             shopName.Alignment = Element.ALIGN_CENTER;
             title.Alignment = Element.ALIGN_CENTER;
-            
-            Paragraph shopEmail = new Paragraph("Shop Contact: thanhvinhle73@gmail.com", lableFont);
-            shopEmail.Alignment = Element.ALIGN_RIGHT;
-            
+
+            //Paragraph shopEmail = new Paragraph("Shop Contact: thanhvinhle73@gmail.com", lableFont);
+            //shopEmail.Alignment = Element.ALIGN_RIGHT;
+
+            Paragraph roomFee = new Paragraph("Room Fee: "+(bill.Booking.StayHour*bill.Booking.Room.HourCost).ToString(TextDictionary.CURRENCY_FORMAT), lableFont);
+            roomFee.Alignment = Element.ALIGN_RIGHT;
+
+            Paragraph xtraFee = new Paragraph("Extra Fee: " + bill.Booking.ExtraFee.ToString(TextDictionary.CURRENCY_FORMAT), lableFont);
+            xtraFee.Alignment = Element.ALIGN_RIGHT;
+
+            Paragraph serviceCost = new Paragraph("Services Cost: " + bill.Booking.ServiceCost.ToString(TextDictionary.CURRENCY_FORMAT), lableFont);
+            serviceCost.Alignment = Element.ALIGN_RIGHT;
+
             Paragraph staff = new Paragraph("Staff: ", lableFont);
             staff.Add(new Paragraph(bill.Employee.Name, normalTextFont));
             Paragraph customer = new Paragraph("Customer: ", lableFont);
             customer.Add(new Paragraph(bill.Customer.Name, normalTextFont));
             Paragraph billDate = new Paragraph("Bill Date: ", lableFont);
             billDate.Add(new Paragraph(bill.BillDate.ToString(), normalTextFont));
-            Paragraph billProducts = new Paragraph("Products: ", lableFont);
+            Paragraph billProducts = new Paragraph("Services: ", lableFont);
             Paragraph totalCost = new Paragraph("Total Cost: " + bill.TotalCost.ToString(TextDictionary.CURRENCY_FORMAT), lableFont);
 
 
             document.Add(shopName);
             document.Add(title);
-            document.Add(shopEmail);
+            //document.Add(shopEmail);
+            document.Add(roomFee);
+            document.Add(xtraFee);
+            document.Add(serviceCost);
             document.Add(staff);
             document.Add(customer);
             document.Add(billDate);
@@ -163,7 +176,9 @@ namespace HotelManagement.Utils
             document.Add(table);
             document.Add(totalCost);
 
-            document.Close();
+                document.Close();
+
+            return outputFilePath;
         }
 
         static void AddContentToColumn(ColumnText columnText, string content)

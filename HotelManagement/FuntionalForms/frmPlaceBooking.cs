@@ -20,8 +20,6 @@ namespace HotelManagement.FuntionalForms
         {
             InitializeComponent();
             //
-            InnitialBooking();
-            PrepareDateTimePicker();
             PrepareServiceGrid();
             ReloadServiceGrid();
             PrepareOrderedServiceGrid();
@@ -36,12 +34,26 @@ namespace HotelManagement.FuntionalForms
             return Instance;
         }
 
+        public bool IsInBooking()
+        {
+            return _booking != null;
+        }
+
+        private bool StopBooking()
+        {
+            _booking = null;
+            return true;
+        }
+
         public bool RegisterToBooking(Employee employee, Room room)
         {
             if(employee == null || room == null) return false;
+            if(_booking != null)
+            {
+                //CancelBooking();
+            }
             InnitialBooking();
-            room.Status = "Bussy";
-            //_room = room;
+            room.Status = TextDictionary.ROOM_BUSSY;
             _booking.Employee = employee;
             _booking.EmployeeID = employee.ID;
             _booking.Room = room;
@@ -78,12 +90,6 @@ namespace HotelManagement.FuntionalForms
             _booking.Status = TextDictionary.BOOKING_APPROVED;
             _booking.CheckinDate = DateTime.Now;
         }
-
-        private void PrepareDateTimePicker()
-        {
-            dateTimePickerCheckOutDate.MinDate = DateTime.Now;
-        }
-
         private void PrepareOrderedServiceGrid()
         {
             dataGridViewOrderedServices.Columns.Add(TextDictionary.SERVICE_ID_COLUMN_NAME, TextDictionary.SERVICE_ID_COLUMN_TEXT);
@@ -118,7 +124,10 @@ namespace HotelManagement.FuntionalForms
             dataGridViewOrderedServices.Rows.Clear();
             if (sds == null)
             {
-                sds = _booking.ServiceDetails;
+                if(_booking!=null)
+                {
+                    sds = _booking.ServiceDetails;
+                }
             }
 
             UpdateOrderedServiceGrid(sds);
@@ -220,8 +229,8 @@ namespace HotelManagement.FuntionalForms
         {
             if(customers == null)
             {
-                if (_booking == null) MessageBox.Show("Hehe");
-                if (_booking.Room == null) return;
+                //if (_booking == null) MessageBox.Show("Hehe");
+                if (_booking == null || _booking.Room == null) return;
                 customers = _booking.Room.StayInRooms;
             }
 
@@ -231,19 +240,7 @@ namespace HotelManagement.FuntionalForms
             UpdateCustomerGrid(customers);
         }
 
-        private void UpdateStayTime()
-        {
-            var spand = dateTimePickerCheckOutDate.Value - dTPCheckinDateTime.Value;
-            var days = Math.Round(spand.TotalDays);
-            var hspand = dateTimePickerCheckOutTime.Value.TimeOfDay - dTPCheckinDateTime.Value.TimeOfDay;
-            
-            double hours = Math.Ceiling(hspand.TotalHours);
-            
-
-            _booking.StayHour = 24 * int.Parse(days.ToString()) + int.Parse(hours.ToString());
-        }
-
-        private void CancelBooking()
+        public void CancelBooking()
         {
             if (_booking != null)
             {
@@ -251,31 +248,28 @@ namespace HotelManagement.FuntionalForms
                 {
                     sd.Service.InStock += sd.Quantity;
                 }
-
+                _booking.Room.Status = TextDictionary.ROOM_READY;
+                StopBooking();
+                HotelDB.GetDBEntities().SaveChanges();
             }
-
-            _booking.Room.Status = TextDictionary.ROOM_READY;
-            //_booking = null;
-            HotelDB.GetDBEntities().SaveChanges();
         }
 
-        private void dateTimePickerCheckOutDate_ValueChanged(object sender, EventArgs e)
+        private void ConfirmBooking()
         {
-            if (dateTimePickerCheckOutDate.Value.Date.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
-            {
-                dateTimePickerCheckOutTime.MinDate = dTPCheckinDateTime.Value;
-            }
-            else
-            {
-                dateTimePickerCheckOutTime.MinDate = dateTimePickerCheckOutDate.Value.Date;
-            }
-            dateTimePickerCheckOutTime.Value = dateTimePickerCheckOutTime.MinDate;
-            UpdateStayTime();
-        }
+            if (_booking == null) return;
+            if (_booking.Room == null) return;
 
-        private void dateTimePickerCheckOutTime_ValueChanged(object sender, EventArgs e)
-        {
-            UpdateStayTime();
+            if (_booking.Room.StayInRooms.Count < 1)
+            {
+                MessageBox.Show("Please add at least one customer!");
+                return;
+            }
+
+
+            HotelDB.GetDBEntities().Bookings.Add(_booking);
+            
+            StopBooking();
+            HotelDB.SaveChanges();
         }
 
         private DialogResult NumericInputDialog(string title, string message, ref int inputValue)
@@ -418,20 +412,9 @@ namespace HotelManagement.FuntionalForms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (_booking == null) return;
-            if (_booking.Room == null) return;
-            
-            if(_booking.Room.StayInRooms.Count<1)
-            {
-                MessageBox.Show("Please add at least one customer!");
-                return;
-            }
-
-
-            HotelDB.GetDBEntities().Bookings.Add(_booking);
-            //MessageBox.Show("Success!");
-            this.Close();
-            HotelDB.SaveChanges();
+            ConfirmBooking();
+            frmMain.GetInstance().OpenMainChild();
+            //this.Hide();
         }
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
@@ -449,7 +432,8 @@ namespace HotelManagement.FuntionalForms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             CancelBooking();
-            this.Close();
+            frmMain.GetInstance().OpenMainChild();
+            //this.Hide();
         }
 
         private void frmPlaceBooking_VisibleChanged(object sender, EventArgs e)
@@ -488,11 +472,6 @@ namespace HotelManagement.FuntionalForms
                 default:
                     break;
             }
-        }
-
-        private void frmPlaceBooking_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //CancelBooking();
         }
     }
 }
